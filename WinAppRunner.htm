@@ -128,19 +128,30 @@
 							// READING THE LOADED FILE
 							zipReader.loadAsync(zipFileData).then(function(zip)
 								{
-								try
-									{
-									// CHECKING IF THE EXE FILENAME IS THE SAME AS THE ZIP FILENAME
-									zip.file(exeFilename).async("string").then(function(data)
-										{
-										// CLEARING THE SELECTED FILE VALUE
-										document.getElementById("gui_controls_file").value = null;
+								// CREATING A VARIABLE TO CHECK IF THE EXECUTABLE FILE WAS FOUND
+								var executableFound = false;
 
-										// STARTING THE EMULATOR
-										downloadSystem();
-										});
+								// LOOPING EVERY ROOT FILE
+								for (var file in zip.files)
+									{
+									// CHECKING IF THE FILE IS THE EXECUTABLE ONE
+									if (file.toLowerCase()==exeFilename.toLowerCase())
+										{
+										// SETTING THAT THE EXECUTABLE FILE WAS FOUND
+										executableFound = true;
+										}
 									}
-									catch(err)
+
+								// CHECKING IF THE EXECUTABLE FILE WAS FOUND
+								if (executableFound==true)
+									{
+									// CLEARING THE SELECTED FILE VALUE
+									document.getElementById("gui_controls_file").value = null;
+
+									// STARTING THE EMULATOR
+									downloadSystem();
+									}
+									else
 									{
 									// CLEARING THE SELECTED FILE VALUE
 									document.getElementById("gui_controls_file").value = null;
