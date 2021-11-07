@@ -256,10 +256,18 @@
 					}
 				}
 
+			// SETTING WHAT WILL HAPPEN WHEN THE WEB IS FULLY LOADED
 			window.addEventListener("load", function()
 				{
+				// CLEARING THE SELECTED FILE VALUE
 				document.getElementById("gui_controls_file").value = null;
+
+				// CLEARING THE EMULATOR CONTAINER
 				document.getElementById("container").contentDocument.location.replace("about:blank");
+
+				// SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON THE START AND UPLOAD ICONS
+				document.getElementsByClassName("gui_start")[0].addEventListener("click",function(event){downloadSystem()});
+				document.getElementsByClassName("gui_upload")[0].addEventListener("click",function(event){document.getElementById("gui_controls_file").click()});
 				});
 		</script>
 
@@ -268,8 +276,8 @@
 		<div class="gui_container">
 			<div class="gui_background"></div>
 			<div class="gui_email"><a href="mailto:info@lrusso.com">info@lrusso.com</a></div>
-			<div class="gui_start" onclick="downloadSystem()"></div>
-			<div class="gui_upload" onclick="document.getElementById('gui_controls_file').click()"></div>
+			<div class="gui_start"></div>
+			<div class="gui_upload"></div>
 			<input type="file" id="gui_controls_file" class="gui_controls_file" onchange="readFile(event.target.files);"/>
 		</div>
 	</body>
