@@ -310,6 +310,9 @@
 				// CLEARING THE EMULATOR CONTAINER
 				document.getElementById("container").contentDocument.location.replace("about:blank");
 
+				// RESTORING THE WINDOW TITLE
+				document.title = "WinApp Runner";
+
 				// SHOWING THE GUI
 				document.getElementsByClassName("gui_container")[0].style.display = "block";
 
