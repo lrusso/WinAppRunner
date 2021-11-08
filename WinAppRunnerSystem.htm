@@ -115,7 +115,7 @@
 				preRun: [(function(){Module["addRunDependency"]("setupBoxedWine");buildFileSystem(new BrowserFS.FileSystem.InMemory(),false)})],
 				arguments: ["-root","/root","-m","64","-w","/home/username/files/","/usr/bin/wine",parent.exeFilename],
 				postRun: [],
-				print: function() {},
+				print: function(text){console.log(text);if(text.indexOf("Main exe initialization")>-1 && text.indexOf("failed")){parent.handleError();}},
 				printErr: function(text) {},
 				canvas: (function() {var canvas=document.getElementById("canvas");canvas.width=800;canvas.height=600;return canvas;})(),
 				setStatus: function(text) {},

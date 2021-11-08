@@ -75,6 +75,9 @@
 			var STRING_ERROR_FILENOTFOUND_TITLE = "";
 			var STRING_ERROR_FILENOTFOUND_MESSAGE = "";
 			var STRING_ERROR_FILENOTFOUND_OK = "";
+			var STRING_ERROR_BOOTING_TITLE = "";
+			var STRING_ERROR_BOOTING_MESSAGE = "";
+			var STRING_ERROR_BOOTING_OK = "";
 			var STRING_BOOTING = "";
 
 			if (userLanguage.substring(0,2)=="es")
@@ -85,6 +88,9 @@
 				STRING_ERROR_FILENOTFOUND_TITLE = "MENSAJE";
 				STRING_ERROR_FILENOTFOUND_MESSAGE = "El archivo ZIP debe contener<br />un EXE con el mismo nombre.<br/><br/>EJEMPLO.ZIP -> EJEMPLO.EXE";
 				STRING_ERROR_FILENOTFOUND_OK = "Aceptar";
+				STRING_ERROR_BOOTING_TITLE = "MENSAJE";
+				STRING_ERROR_BOOTING_MESSAGE = "Hubo un error al iniciar la App.<br />Consulta la consola del navegador.";
+				STRING_ERROR_BOOTING_OK = "Aceptar";
 				STRING_BOOTING = "Iniciando...";
 				}
 				else
@@ -95,6 +101,9 @@
 				STRING_ERROR_FILENOTFOUND_TITLE = "MESSAGE";
 				STRING_ERROR_FILENOTFOUND_MESSAGE = "The ZIP file must contain an<br />EXE file with the same name.<br/><br/>EXAMPLE.ZIP -> EXAMPLE.EXE";
 				STRING_ERROR_FILENOTFOUND_OK = "OK";
+				STRING_ERROR_BOOTING_TITLE = "MESSAGE";
+				STRING_ERROR_BOOTING_MESSAGE = "Error while running the App.<br />Check the browser console.";
+				STRING_ERROR_BOOTING_OK = "OK";
 				STRING_BOOTING = "Booting...";
 				}
 
@@ -181,11 +190,14 @@
 
 			function downloadSystem()
 				{
-				// HIDES THE GUI
+				// HIDING THE GUI
 				document.getElementsByClassName("gui_container")[0].style.display = "none";
 
 				// SHOWING THE SPINNER
 				document.getElementsByClassName("gui_pleasewait")[0].style.display = "block";
+
+				// CLEARING THE PROGRESS INDICATOR
+				document.getElementsByClassName("gui_percentage")[0].innerHTML = "";
 
 				// SHOWING THE PROGRESS INDICATOR
 				document.getElementsByClassName("gui_percentage")[0].style.display = "block";
@@ -266,6 +278,8 @@
 					{
 					// DISPLAYING THE EMULATOR CONTAINER
 					document.getElementById("container").style.display = "block";
+
+					// FOCUSING THE CONTAINER
 					document.getElementById("container").focus();
 
 					// STARTING THE EMULATOR
@@ -279,6 +293,30 @@
 			function updateTitle(myMIPS)
 				{
 				document.title = "WinApp Runner - " + myMIPS;
+				}
+
+			function handleError()
+				{
+				// HIDING THE SPINNER
+				document.getElementsByClassName("gui_pleasewait")[0].style.display = "none";
+
+				// HIDING THE PROGRESS INDICATOR
+				document.getElementsByClassName("gui_percentage")[0].style.display = "none";
+
+				// HIDING THE EMULATOR CONTAINER
+				document.getElementById("container").style.display = "none";
+
+				// CLEARING THE EMULATOR CONTAINER
+				document.getElementById("container").contentDocument.location.replace("about:blank");
+
+				// SHOWING THE GUI
+				document.getElementsByClassName("gui_container")[0].style.display = "block";
+
+				// RESETTING THE EXECUTABLE FILENAME
+				exeFilename = exeDefault;
+
+				// SHOWING ALERT MESSAGE
+				alertCustom(STRING_ERROR_BOOTING_TITLE, STRING_ERROR_BOOTING_MESSAGE, STRING_ERROR_BOOTING_OK, function(){});
 				}
 
 			// SETTING WHAT WILL HAPPEN WHEN THE WEB IS FULLY LOADED
