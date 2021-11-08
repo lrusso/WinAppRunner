@@ -128,7 +128,7 @@
 						// SETTING WHAT WILL HAPPEN WHEN THE FILE IS READ
 						filereader.onload = function()
 							{
-							// SETS THE FILE CONTENT FOR THE EMULATORS
+							// GETTING THE FILE CONTENT
 							zipFileData = this.result;
 
 							// CREATING A ZIP READER
@@ -292,6 +292,7 @@
 
 			function updateTitle(myMIPS)
 				{
+				// UPDATING THE WINDOW TITLE WITH THE CURRENT MIPS
 				document.title = "WinApp Runner - " + myMIPS;
 				}
 
