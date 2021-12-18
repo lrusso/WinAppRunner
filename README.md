@@ -22,4 +22,3 @@ Upload a ZIP file that contains your EXE file. The ZIP filename must the same as
 ## Based on the work of:
 
 https://github.com/danoon2/Boxedwine
-aaa
